@@ -1,0 +1,220 @@
+/* =========================
+   Norvak Tokens (cambia aquí y cambia todo)
+========================= */
+:root{
+  --bg: #0b0b10;
+
+  --panel: rgba(20, 20, 28, 0.68);
+  --panel-border: rgba(255, 255, 255, 0.10);
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.68);
+
+  /* Acentos neon Norvak (ajusta si tienes hex exactos) */
+  --accent: #7c3aed;   /* violeta neon */
+  --accent2:#22d3ee;   /* cian neon */
+
+  --shadow: rgba(0,0,0,0.55);
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+
+  /* Fondo neon sutil, no discoteca */
+  background:
+    radial-gradient(1000px 600px at 20% 10%, rgba(124, 58, 237, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 80% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 50% 90%, rgba(124, 58, 237, 0.10), transparent 55%),
+    var(--bg);
+}
+
+/* =========================
+   Layout
+========================= */
+.page{
+  min-height:100%;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+.card{
+  width:100%;
+  max-width: 460px;
+  padding: 26px 22px 18px;
+  border-radius: 18px;
+
+  background:
+    linear-gradient(rgba(11,11,16,.85), rgba(11,11,16,.85)),
+    url("img/Norvak-background.png") center / cover no-repeat;
+
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(12px);
+
+  /* Glow controlado (premium, no “arcade”) */
+  box-shadow:
+    0 18px 50px var(--shadow),
+    0 0 0 1px rgba(255,255,255,.08),
+    0 0 40px rgba(124,58,237,.18),
+    0 0 40px rgba(34,211,238,.12);
+}
+
+/* =========================
+   Branding
+========================= */
+.brand-logo{
+  display:block;
+  width: 92px;
+  height: auto;
+  margin: 0 auto 12px;
+  .brand-logo{
+  mix-blend-mode: screen;
+}
+
+
+  /* NO cuadrito */
+  border-radius: 0;
+  background: transparent;
+
+  /* glow suave alrededor, sin encasillar */
+  filter:
+    drop-shadow(0 10px 18px rgba(0,0,0,.45))
+    drop-shadow(0 0 18px rgba(0,255,170,.18))
+    drop-shadow(0 0 18px rgba(255,60,210,.14));
+}
+
+/* =========================
+   Texto
+========================= */
+.title{
+  margin: 0;
+  text-align:center;
+  font-size: 30px;
+  letter-spacing: .4px;
+
+  /* Glow con control */
+  text-shadow:
+    0 0 14px rgba(124,58,237,.35),
+    0 0 22px rgba(34,211,238,.20);
+}
+
+.subtitle{
+  margin: 10px 0 18px;
+  text-align:center;
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 14.5px;
+}
+
+/* =========================
+   Links (chips pro)
+========================= */
+.links{
+  display:grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding: 14px 14px;
+  border-radius: 14px;
+
+  text-decoration:none;
+  color: var(--text);
+
+  /* “chip” moderno */
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+
+.link-left{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 650;
+  letter-spacing: .2px;
+}
+
+.link-left i{
+  width: 18px;
+  text-align:center;
+  opacity: .92;
+}
+
+/* flechita */
+.link-right{
+  opacity: .65;
+  font-size: .95rem;
+}
+
+/* Hover: elevación + glow sutil */
+.link:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(124,58,237,0.55);
+  box-shadow:
+    0 16px 30px rgba(0,0,0,0.40),
+    0 0 22px rgba(124,58,237,.12);
+}
+
+.link:active{
+  transform: translateY(0px);
+}
+
+.link:focus-visible{
+  outline: 2px solid rgba(34,211,238,0.65);
+  outline-offset: 3px;
+}
+
+/* =========================
+   Footer
+========================= */
+.footer{
+  margin-top: 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  color: rgba(255,255,255,0.62);
+  font-size: 12.5px;
+}
+
+.dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent2);
+  box-shadow: 0 0 18px rgba(34,211,238,0.55);
+}
+
+/* =========================
+   Mobile tweaks
+========================= */
+@media (max-width: 360px){
+  .card{ padding: 22px 16px 16px; }
+  .title{ font-size: 26px; }
+}
+
+#matrix{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.12; /* CLAVE: sutil */
+}
+
+.page{
+  position: relative;
+  z-index: 1;
+}
