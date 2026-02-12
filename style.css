@@ -10,11 +10,15 @@
   --text: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.68);
 
-  /* Acentos neon Norvak (ajusta si tienes hex exactos) */
+  /* Acentos neon Norvak */
   --accent: #7c3aed;   /* violeta neon */
   --accent2:#22d3ee;   /* cian neon */
 
   --shadow: rgba(0,0,0,0.55);
+
+  /* control fino */
+  --card-radius: 18px;
+  --card-max: 460px;
 }
 
 *{ box-sizing:border-box; }
@@ -25,12 +29,32 @@ body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
 
-  /* Fondo neon sutil, no discoteca */
+  /* Fondo neon sutil */
   background:
     radial-gradient(1000px 600px at 20% 10%, rgba(124, 58, 237, 0.16), transparent 60%),
     radial-gradient(900px 600px at 80% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
     radial-gradient(900px 700px at 50% 90%, rgba(124, 58, 237, 0.10), transparent 55%),
     var(--bg);
+}
+
+/* =========================
+   Matrix layer (behind everything)
+========================= */
+#matrix{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.12; /* sutil */
+}
+
+/* Overlay para que el texto SIEMPRE se lea (premium, no básico) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events:none;
+  background: radial-gradient(900px 650px at 50% 25%, rgba(0,0,0,0.10), rgba(0,0,0,0.45));
 }
 
 /* =========================
@@ -41,27 +65,55 @@ body{
   display:grid;
   place-items:center;
   padding:24px;
+
+  position: relative;
+  z-index: 1;
 }
 
 .card{
   width:100%;
-  max-width: 460px;
+  max-width: var(--card-max);
   padding: 26px 22px 18px;
-  border-radius: 18px;
+  border-radius: var(--card-radius);
 
+  /* Fondo card con imagen + tinte */
   background:
-    linear-gradient(rgba(11,11,16,.85), rgba(11,11,16,.85)),
+    linear-gradient(rgba(11,11,16,.86), rgba(11,11,16,.86)),
     url("img/Norvak-background.png") center / cover no-repeat;
 
-  border: 1px solid var(--panel-border);
+  border: 1px solid rgba(255,255,255,.10);
   backdrop-filter: blur(12px);
 
-  /* Glow controlado (premium, no “arcade”) */
+  /* Glow controlado + “depth” */
   box-shadow:
     0 18px 50px var(--shadow),
-    0 0 0 1px rgba(255,255,255,.08),
-    0 0 40px rgba(124,58,237,.18),
-    0 0 40px rgba(34,211,238,.12);
+    0 0 0 1px rgba(255,255,255,.07),
+    0 0 50px rgba(124,58,237,.16),
+    0 0 45px rgba(34,211,238,.12);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* borde premium con gradiente sutil */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:1px;
+  border-radius: inherit;
+  pointer-events:none;
+  background: linear-gradient(135deg,
+    rgba(34,211,238,.30),
+    rgba(124,58,237,.26),
+    rgba(255,255,255,.05)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: .55;
 }
 
 /* =========================
@@ -72,16 +124,12 @@ body{
   width: 92px;
   height: auto;
   margin: 0 auto 12px;
-  .brand-logo{
+
   mix-blend-mode: screen;
-}
 
-
-  /* NO cuadrito */
   border-radius: 0;
   background: transparent;
 
-  /* glow suave alrededor, sin encasillar */
   filter:
     drop-shadow(0 10px 18px rgba(0,0,0,.45))
     drop-shadow(0 0 18px rgba(0,255,170,.18))
@@ -97,7 +145,6 @@ body{
   font-size: 30px;
   letter-spacing: .4px;
 
-  /* Glow con control */
   text-shadow:
     0 0 14px rgba(124,58,237,.35),
     0 0 22px rgba(34,211,238,.20);
@@ -131,12 +178,16 @@ body{
   text-decoration:none;
   color: var(--text);
 
-  /* “chip” moderno */
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.055);
   border: 1px solid rgba(255,255,255,0.10);
   box-shadow: 0 10px 22px rgba(0,0,0,0.28);
 
-  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
 }
 
 .link-left{
@@ -153,24 +204,35 @@ body{
   opacity: .92;
 }
 
-/* flechita */
+/* iconito derecha: elegante (aparece con intención) */
 .link-right{
-  opacity: .65;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 160ms ease, transform 160ms ease;
   font-size: .95rem;
 }
 
 /* Hover: elevación + glow sutil */
 .link:hover{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(124,58,237,0.55);
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.075);
+  border-color: rgba(34,211,238,0.45);
   box-shadow:
-    0 16px 30px rgba(0,0,0,0.40),
-    0 0 22px rgba(124,58,237,.12);
+    0 18px 34px rgba(0,0,0,0.45),
+    0 0 26px rgba(124,58,237,.12),
+    0 0 18px rgba(34,211,238,.10);
+}
+
+/* el iconito aparece solo cuando importa */
+.link:hover .link-right,
+.link:focus-visible .link-right{
+  opacity: .75;
+  transform: translateX(0);
 }
 
 .link:active{
-  transform: translateY(0px);
+  transform: translateY(-1px);
+  filter: brightness(1.02);
 }
 
 .link:focus-visible{
@@ -207,14 +269,14 @@ body{
   .title{ font-size: 26px; }
 }
 
-#matrix{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.12; /* CLAVE: sutil */
-}
-
-.page{
-  position: relative;
-  z-index: 1;
+/* =========================
+   Motion accessibility (pro)
+========================= */
+@media (prefers-reduced-motion: reduce){
+  .link, .link-right{
+    transition: none !important;
+  }
+  .link:hover{
+    transform: none !important;
+  }
 }
