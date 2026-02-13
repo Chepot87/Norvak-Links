@@ -1,35 +1,34 @@
 /* =========================
    Norvak Tokens (cambia aquí y cambia todo)
 ========================= */
-:root{
+:root {
   --bg: #0b0b10;
-
-  --panel: rgba(20, 20, 28, 0.68);
-  --panel-border: rgba(255, 255, 255, 0.10);
 
   --text: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.68);
 
   /* Acentos neon Norvak */
   --accent: #7c3aed;   /* violeta neon */
-  --accent2:#22d3ee;   /* cian neon */
+  --accent2: #22d3ee;  /* cian neon */
 
-  --shadow: rgba(0,0,0,0.55);
+  --shadow: rgba(0, 0, 0, 0.55);
 
-  /* control fino */
   --card-radius: 18px;
   --card-max: 460px;
+
+  /* Branding sizing */
+  --logo-size: 112px;         /* antes 92px */
+  --logo-size-mobile: 104px;  /* control en móvil */
 }
 
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
 
-  /* Fondo neon sutil */
   background:
     radial-gradient(1000px 600px at 20% 10%, rgba(124, 58, 237, 0.16), transparent 60%),
     radial-gradient(900px 600px at 80% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
@@ -38,149 +37,186 @@ body{
 }
 
 /* =========================
-   Matrix layer (behind everything)
+   Matrix layer
 ========================= */
-#matrix{
+#matrix {
   position: fixed;
   inset: 0;
   z-index: 0;
-  opacity: 0.12; /* sutil */
+  opacity: 0.12;
 }
 
-/* Overlay para que el texto SIEMPRE se lea (premium, no básico) */
-body::before{
-  content:"";
+/* Overlay para contraste */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
-  pointer-events:none;
-  background: radial-gradient(900px 650px at 50% 25%, rgba(0,0,0,0.10), rgba(0,0,0,0.45));
+  pointer-events: none;
+  background: radial-gradient(
+    900px 650px at 50% 25%,
+    rgba(0, 0, 0, 0.10),
+    rgba(0, 0, 0, 0.45)
+  );
 }
 
 /* =========================
    Layout
 ========================= */
-.page{
-  min-height:100%;
-  display:grid;
-  place-items:center;
-  padding:24px;
-
+.page {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
   position: relative;
   z-index: 1;
 }
 
-.card{
-  width:100%;
+.card {
+  width: 100%;
   max-width: var(--card-max);
   padding: 26px 22px 18px;
   border-radius: var(--card-radius);
 
-  /* Fondo card con imagen + tinte */
   background:
-    linear-gradient(rgba(11,11,16,.86), rgba(11,11,16,.86)),
+    linear-gradient(rgba(11, 11, 16, 0.86), rgba(11, 11, 16, 0.86)),
     url("img/Norvak-background.png") center / cover no-repeat;
 
-  border: 1px solid rgba(255,255,255,.10);
-  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 
-  /* Glow controlado + “depth” */
+  /* ✅ Fix: Safari compatibility + linter chill */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   box-shadow:
     0 18px 50px var(--shadow),
-    0 0 0 1px rgba(255,255,255,.07),
-    0 0 50px rgba(124,58,237,.16),
-    0 0 45px rgba(34,211,238,.12);
+    0 0 0 1px rgba(255, 255, 255, 0.07),
+    0 0 50px rgba(124, 58, 237, 0.16),
+    0 0 45px rgba(34, 211, 238, 0.12);
 
   position: relative;
   overflow: hidden;
 }
 
-/* borde premium con gradiente sutil */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  padding:1px;
+/* Borde premium con gradiente */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
   border-radius: inherit;
-  pointer-events:none;
-  background: linear-gradient(135deg,
-    rgba(34,211,238,.30),
-    rgba(124,58,237,.26),
-    rgba(255,255,255,.05)
+  pointer-events: none;
+  opacity: 0.55;
+
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.30),
+    rgba(124, 58, 237, 0.26),
+    rgba(255, 255, 255, 0.05)
   );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: .55;
 }
+
+/* Solo aplicar el “mask trick” si el navegador lo soporta */
+@supports (-webkit-mask-composite: xor) or (mask-composite: exclude) {
+  .card::before {
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
 
 /* =========================
    Branding
 ========================= */
-.brand-logo{
-  display:block;
-  width: 92px;
+.brand-logo {
+  display: block;
+  width: var(--logo-size);
   height: auto;
   margin: 0 auto 12px;
 
   mix-blend-mode: screen;
-
   border-radius: 0;
   background: transparent;
 
   filter:
-    drop-shadow(0 10px 18px rgba(0,0,0,.45))
-    drop-shadow(0 0 18px rgba(0,255,170,.18))
-    drop-shadow(0 0 18px rgba(255,60,210,.14));
+    drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 18px rgba(0, 255, 170, 0.18))
+    drop-shadow(0 0 18px rgba(255, 60, 210, 0.14));
 }
 
 /* =========================
    Texto
 ========================= */
-.title{
+.title {
   margin: 0;
-  text-align:center;
+  text-align: center;
   font-size: 30px;
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
 
   text-shadow:
-    0 0 14px rgba(124,58,237,.35),
-    0 0 22px rgba(34,211,238,.20);
+    0 0 14px rgba(124, 58, 237, 0.35),
+    0 0 22px rgba(34, 211, 238, 0.20);
 }
 
-.subtitle{
-  margin: 10px 0 18px;
-  text-align:center;
+.subtitle {
+  margin: 10px 0 12px;
+  text-align: center;
   color: var(--muted);
   line-height: 1.45;
   font-size: 14.5px;
 }
 
 /* =========================
-   Links (chips pro)
+   Tags
 ========================= */
-.links{
-  display:grid;
+.tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   Links
+========================= */
+.links {
+  display: grid;
   gap: 10px;
   margin-top: 8px;
 }
 
-.link{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   padding: 14px 14px;
   border-radius: 14px;
 
-  text-decoration:none;
+  text-decoration: none;
   color: var(--text);
 
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
 
   transition:
     transform 160ms ease,
@@ -190,93 +226,107 @@ body::before{
     filter 160ms ease;
 }
 
-.link-left{
-  display:flex;
-  align-items:center;
+.link-left {
+  display: flex;
+  align-items: center;
   gap: 10px;
   font-weight: 650;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
 }
 
-.link-left i{
+.link-left i {
   width: 18px;
-  text-align:center;
-  opacity: .92;
+  text-align: center;
+  opacity: 0.92;
 }
 
-/* iconito derecha: elegante (aparece con intención) */
-.link-right{
+/* Icon derecha: aparece con intención */
+.link-right {
   opacity: 0;
   transform: translateX(-4px);
   transition: opacity 160ms ease, transform 160ms ease;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
-/* Hover: elevación + glow sutil */
-.link:hover{
+/* Hover */
+.link:hover {
   transform: translateY(-3px);
-  background: rgba(255,255,255,0.075);
-  border-color: rgba(34,211,238,0.45);
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(34, 211, 238, 0.45);
   box-shadow:
-    0 18px 34px rgba(0,0,0,0.45),
-    0 0 26px rgba(124,58,237,.12),
-    0 0 18px rgba(34,211,238,.10);
+    0 18px 34px rgba(0, 0, 0, 0.45),
+    0 0 26px rgba(124, 58, 237, 0.12),
+    0 0 18px rgba(34, 211, 238, 0.10);
 }
 
-/* el iconito aparece solo cuando importa */
 .link:hover .link-right,
-.link:focus-visible .link-right{
-  opacity: .75;
+.link:focus-visible .link-right {
+  opacity: 0.75;
   transform: translateX(0);
 }
 
-.link:active{
+.link:active {
   transform: translateY(-1px);
   filter: brightness(1.02);
 }
 
-.link:focus-visible{
-  outline: 2px solid rgba(34,211,238,0.65);
+.link:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.65);
   outline-offset: 3px;
+}
+
+/* CTA special */
+.link-cta {
+  border-color: rgba(124, 58, 237, 0.35);
+  background: linear-gradient(
+    90deg,
+    rgba(124, 58, 237, 0.16),
+    rgba(34, 211, 238, 0.10)
+  );
+}
+
+.link-cta:hover {
+  border-color: rgba(124, 58, 237, 0.60);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.50),
+    0 0 30px rgba(124, 58, 237, 0.16),
+    0 0 22px rgba(34, 211, 238, 0.14);
 }
 
 /* =========================
    Footer
 ========================= */
-.footer{
+.footer {
   margin-top: 16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 12.5px;
 }
 
-.dot{
+.dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
   background: var(--accent2);
-  box-shadow: 0 0 18px rgba(34,211,238,0.55);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.55);
 }
 
 /* =========================
    Mobile tweaks
 ========================= */
-@media (max-width: 360px){
-  .card{ padding: 22px 16px 16px; }
-  .title{ font-size: 26px; }
+@media (max-width: 360px) {
+  .card { padding: 22px 16px 16px; }
+  .title { font-size: 26px; }
+  .brand-logo { width: var(--logo-size-mobile); }
 }
 
 /* =========================
-   Motion accessibility (pro)
+   Motion accessibility
 ========================= */
-@media (prefers-reduced-motion: reduce){
-  .link, .link-right{
-    transition: none !important;
-  }
-  .link:hover{
-    transform: none !important;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .link, .link-right { transition: none !important; }
+  .link:hover { transform: none !important; }
 }
