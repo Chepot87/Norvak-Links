@@ -2,14 +2,14 @@
    Norvak Tokens (cambia aquí y cambia todo)
 ========================= */
 :root {
-  --bg: #0b0b10;
+  --bg: #101112;
 
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.68);
+  --text: rgba(245, 245, 240, 0.92);
+  --muted: rgba(245, 245, 240, 0.68);
 
   /* Acentos neon Norvak */
-  --accent: #7c3aed;   /* violeta neon */
-  --accent2: #22d3ee;  /* cian neon */
+  --accent: #ff2f92;   /* rosa neon */
+  --accent2: #2fff6b;  /* verde neon */
 
   --shadow: rgba(0, 0, 0, 0.55);
 
@@ -30,9 +30,9 @@ body {
   color: var(--text);
 
   background:
-    radial-gradient(1000px 600px at 20% 10%, rgba(124, 58, 237, 0.16), transparent 60%),
-    radial-gradient(900px 600px at 80% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
-    radial-gradient(900px 700px at 50% 90%, rgba(124, 58, 237, 0.10), transparent 55%),
+    radial-gradient(1000px 600px at 20% 10%, rgba(255, 47, 146, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 80% 30%, rgba(47, 255, 107, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 50% 90%, rgba(255, 47, 146, 0.10), transparent 55%),
     var(--bg);
 }
 
@@ -81,10 +81,10 @@ body::before {
   border-radius: var(--card-radius);
 
   background:
-    linear-gradient(rgba(11, 11, 16, 0.86), rgba(11, 11, 16, 0.86)),
+    linear-gradient(rgba(16, 17, 18, 0.86), rgba(16, 17, 18, 0.86)),
     url("img/Norvak-background.png") center / cover no-repeat;
 
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(245, 245, 240, 0.10);
 
   /* ✅ Fix: Safari compatibility + linter chill */
   backdrop-filter: blur(12px);
@@ -92,9 +92,9 @@ body::before {
 
   box-shadow:
     0 18px 50px var(--shadow),
-    0 0 0 1px rgba(255, 255, 255, 0.07),
-    0 0 50px rgba(124, 58, 237, 0.16),
-    0 0 45px rgba(34, 211, 238, 0.12);
+    0 0 0 1px rgba(245, 245, 240, 0.07),
+    0 0 50px rgba(255, 47, 146, 0.16),
+    0 0 45px rgba(47, 255, 107, 0.12);
 
   position: relative;
   overflow: hidden;
@@ -112,9 +112,9 @@ body::before {
 
   background: linear-gradient(
     135deg,
-    rgba(34, 211, 238, 0.30),
-    rgba(124, 58, 237, 0.26),
-    rgba(255, 255, 255, 0.05)
+    rgba(47, 255, 107, 0.30),
+    rgba(255, 47, 146, 0.26),
+    rgba(245, 245, 240, 0.05)
   );
 }
 
@@ -149,8 +149,8 @@ body::before {
 
   filter:
     drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45))
-    drop-shadow(0 0 18px rgba(0, 255, 170, 0.18))
-    drop-shadow(0 0 18px rgba(255, 60, 210, 0.14));
+    drop-shadow(0 0 18px rgba(47, 255, 107, 0.18))
+    drop-shadow(0 0 18px rgba(255, 47, 146, 0.14));
 }
 
 /* =========================
@@ -163,8 +163,8 @@ body::before {
   letter-spacing: 0.4px;
 
   text-shadow:
-    0 0 14px rgba(124, 58, 237, 0.35),
-    0 0 22px rgba(34, 211, 238, 0.20);
+    0 0 14px rgba(255, 47, 146, 0.35),
+    0 0 22px rgba(47, 255, 107, 0.20);
 }
 
 .subtitle {
@@ -190,9 +190,9 @@ body::before {
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
-  color: rgba(255, 255, 255, 0.86);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(245, 245, 240, 0.86);
+  background: rgba(245, 245, 240, 0.05);
+  border: 1px solid rgba(245, 245, 240, 0.10);
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
 }
 
@@ -216,8 +216,8 @@ body::before {
   text-decoration: none;
   color: var(--text);
 
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(245, 245, 240, 0.055);
+  border: 1px solid rgba(245, 245, 240, 0.10);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
 
   transition:
@@ -253,12 +253,12 @@ body::before {
 /* Hover */
 .link:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.075);
-  border-color: rgba(34, 211, 238, 0.45);
+  background: rgba(245, 245, 240, 0.075);
+  border-color: rgba(47, 255, 107, 0.45);
   box-shadow:
     0 18px 34px rgba(0, 0, 0, 0.45),
-    0 0 26px rgba(124, 58, 237, 0.12),
-    0 0 18px rgba(34, 211, 238, 0.10);
+    0 0 26px rgba(255, 47, 146, 0.12),
+    0 0 18px rgba(47, 255, 107, 0.10);
 }
 
 .link:hover .link-right,
@@ -273,26 +273,26 @@ body::before {
 }
 
 .link:focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.65);
+  outline: 2px solid rgba(47, 255, 107, 0.65);
   outline-offset: 3px;
 }
 
 /* CTA special */
 .link-cta {
-  border-color: rgba(124, 58, 237, 0.35);
+  border-color: rgba(255, 47, 146, 0.35);
   background: linear-gradient(
     90deg,
-    rgba(124, 58, 237, 0.16),
-    rgba(34, 211, 238, 0.10)
+    rgba(255, 47, 146, 0.16),
+    rgba(47, 255, 107, 0.10)
   );
 }
 
 .link-cta:hover {
-  border-color: rgba(124, 58, 237, 0.60);
+  border-color: rgba(255, 47, 146, 0.60);
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.50),
-    0 0 30px rgba(124, 58, 237, 0.16),
-    0 0 22px rgba(34, 211, 238, 0.14);
+    0 0 30px rgba(255, 47, 146, 0.16),
+    0 0 22px rgba(47, 255, 107, 0.14);
 }
 
 /* =========================
@@ -304,7 +304,7 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(245, 245, 240, 0.62);
   font-size: 12.5px;
 }
 
@@ -313,7 +313,7 @@ body::before {
   height: 8px;
   border-radius: 999px;
   background: var(--accent2);
-  box-shadow: 0 0 18px rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 18px rgba(47, 255, 107, 0.55);
 }
 
 /* =========================

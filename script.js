@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function draw() {
     // Fade trail (slightly stronger fade = calmer look)
-    ctx.fillStyle = "rgba(11, 11, 16, 0.10)";
+    ctx.fillStyle = "rgba(16, 17, 18, 0.10)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#00ff9d";
+    ctx.fillStyle = "#2fff6b";
     ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < drops.length; i++) {
